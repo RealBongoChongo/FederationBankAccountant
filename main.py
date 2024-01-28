@@ -1,6 +1,7 @@
 import discord
 import webserver
 import os
+import sys
 import argparse
 import json
 import requests
@@ -40,6 +41,15 @@ async def addcredits(ctx, account, adder, amount:int, reason="No Reason Specifie
         )
 
         await ctx.respond(request.status_code)
+
+@bot.command(description="restart")
+async def restart(ctx):
+    if not ctx.author.id == 485513915548041239:
+        return
+    await ctx.defer()
+    await ctx.respond("Restarting...")
+    requests.get("http://localhost:6060/fbdc")
+    os.execv(sys.executable, ['python'] + sys.argv)
 
 @bot.event
 async def on_ready():
