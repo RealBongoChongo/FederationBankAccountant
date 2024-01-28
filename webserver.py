@@ -20,4 +20,4 @@ except:
     pass
 
 def run():
-    app.run(host="0.0.0.0", port=9191)
+    app.run(host="0.0.0.0", port=9393)
