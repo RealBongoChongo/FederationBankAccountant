@@ -27,6 +27,19 @@ def getConfig(key):
 
 bot = discord.Bot(intents=discord.Intents.all())
 
+@bot.command(name="calculate-interest", guild_ids=[1132706354415534162])
+async def addcredits(ctx):
+    if ctx.author.id == 485513915548041239:
+        await ctx.defer()
+        request = requests.post(
+            "https://bank.federationfleet.xyz/calcinterest",
+            json={
+                "auth": getConfig("token")
+            }
+        )
+
+        await ctx.respond(request.status_code)
+
 @bot.command(name="add-credits", guild_ids=[1132706354415534162])
 async def addcredits(ctx, account, adder, amount:int, reason="No Reason Specified"):
     if ctx.author.id == 485513915548041239:
